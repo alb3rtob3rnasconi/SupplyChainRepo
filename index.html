@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Supply Chain Cimplasta SrL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+        }
+
+        .process-arrow::after {
+            content: "➜";
+            font-size: 1.5rem;
+            color: #9CA3AF;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .process-arrow::after {
+                content: "⬇";
+                display: block;
+                margin: 0.5rem auto;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <header class="bg-[#4C1D95] text-white py-12 px-6 shadow-lg">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div>
+                    <h2 class="text-pink-400 font-bold tracking-wider uppercase text-sm mb-2">Report Strategico 2024</h2>
+                    <h1 class="text-3xl md:text-5xl font-bold mb-4">Ottimizzazione Logistica E-Commerce</h1>
+                    <p class="text-xl text-purple-200 max-w-2xl text-justify">Modello "Zero Pensieri": Analisi dei costi, selezione partner e prospetto strategico per Cimplasta SrL.</p>
+                </div>
+                <div class="mt-6 md:mt-0 bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/20">
+                    <span class="block text-2xl font-bold">Cimplasta SrL</span>
+                    <span class="text-sm text-purple-200">Reparto Economico & Strategia</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 space-y-12">
+
+        <section class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#DB2777]">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-[#4C1D95]">Il Concetto "Zero Pensieri"</h2>
+                <a href="AnalisiEconometrica.html" class="px-4 py-2 bg-[#4C1D95] text-white text-sm font-semibold rounded-lg hover:bg-[#3B1775] transition-colors">Vedi Analisi Econometrica ➔</a>
+            </div>
+            <p class="text-slate-600 leading-relaxed mb-8 text-justify">
+                L'obiettivo è trasformare la logistica da centro di costo operativo a servizio in outsourcing strategico. 
+                Cimplasta SrL si concentra esclusivamente sulla produzione. Un partner 3PL (Third Party Logistics) gestisce stoccaggio, 
+                imballaggio e spedizione finale ("Ultimo Miglio"). Questo modello elimina i costi fissi di magazzino e le complessità di gestione dei corrieri.
+            </p>
+
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4 p-6 bg-slate-50 rounded-lg border border-slate-200">
+                <div class="flex flex-col items-center text-center w-full md:w-1/4 p-4 bg-white shadow-sm rounded-lg border-l-4 border-[#4C1D95]">
+                    <span class="text-4xl mb-2">🏭</span>
+                    <h3 class="font-bold text-[#4C1D95]">Cimplasta SrL</h3>
+                    <p class="text-xs text-slate-500 mt-1">Produzione & Palletizzazione</p>
+                </div>
+
+                <div class="process-arrow"></div>
+
+                <div class="flex flex-col items-center text-center w-full md:w-1/4 p-4 bg-white shadow-sm rounded-lg border-l-4 border-[#0891B2]">
+                    <span class="text-4xl mb-2">🚛</span>
+                    <h3 class="font-bold text-[#0891B2]">Hub Logistico (3PL)</h3>
+                    <p class="text-xs text-slate-500 mt-1">Stoccaggio, Picking & Packing</p>
+                </div>
+
+                <div class="process-arrow"></div>
+
+                <div class="flex flex-col items-center text-center w-full md:w-1/4 p-4 bg-white shadow-sm rounded-lg border-l-4 border-[#D97706]">
+                    <span class="text-4xl mb-2">📦</span>
+                    <h3 class="font-bold text-[#D97706]">Corriere Espresso</h3>
+                    <p class="text-xs text-slate-500 mt-1">Consegna Ultimo Miglio</p>
+                </div>
+
+                <div class="process-arrow"></div>
+
+                <div class="flex flex-col items-center text-center w-full md:w-1/4 p-4 bg-white shadow-sm rounded-lg border-l-4 border-[#DB2777]">
+                    <span class="text-4xl mb-2">👤</span>
+                    <h3 class="font-bold text-[#DB2777]">Cliente Finale</h3>
+                    <p class="text-xs text-slate-500 mt-1">Ricezione Ordine 24/48h</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#0891B2]">
+            <h3 class="text-2xl font-bold text-[#0891B2] mb-4">Tabella Comparativa dei Costi Logistici</h3>
+            <p class="text-slate-600 leading-relaxed mb-6 text-justify">
+                Di seguito è riportata la ripartizione strategica delle voci di costo. Il passaggio al modello in outsourcing permette di trasformare i costi fissi preesistenti in costi puramente variabili, legati esclusivamente ai volumi di vendita e spedizione effettivi, ottimizzando il flusso di cassa.
+            </p>
+            
+            <div class="overflow-x-auto rounded-lg border border-slate-200">
+                <table class="min-w-full text-left text-sm whitespace-nowrap">
+                    <thead class="uppercase tracking-wider border-b-2 border-slate-200 bg-slate-50 text-slate-600">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 font-bold">Voce di Costo</th>
+                            <th scope="col" class="px-6 py-4 font-bold">Gestione Interna</th>
+                            <th scope="col" class="px-6 py-4 font-bold">Outsourcing (3PL)</th>
+                            <th scope="col" class="px-6 py-4 font-bold">Vantaggio Strategico</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="hover:bg-slate-50">
+                            <th scope="row" class="px-6 py-4 font-medium text-slate-900 bg-white">Stoccaggio Magazzino</th>
+                            <td class="px-6 py-4 text-red-600 font-semibold bg-white">Costo Fisso Mensile (Affitto + Utenze)</td>
+                            <td class="px-6 py-4 text-green-600 font-semibold bg-white">Costo Variabile (Per Pallet/Mese)</td>
+                            <td class="px-6 py-4 text-slate-600 text-justify whitespace-normal bg-white">Eliminazione totale dei costi operativi di struttura nei mesi di bassa stagionalità.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <th scope="row" class="px-6 py-4 font-medium text-slate-900 bg-white">Personale Magazzino</th>
+                            <td class="px-6 py-4 text-red-600 font-semibold bg-white">Stipendi Fissi + Straordinari</td>
+                            <td class="px-6 py-4 text-green-600 font-semibold bg-white">Incluso nella quota "Picking & Packing"</td>
+                            <td class="px-6 py-4 text-slate-600 text-justify whitespace-normal bg-white">Nessun costo per il lavoro subordinato legato alla preparazione dei colli.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <th scope="row" class="px-6 py-4 font-medium text-slate-900 bg-white">Tariffa Spedizione (Corriere)</th>
+                            <td class="px-6 py-4 text-red-600 font-semibold bg-white">Listino Standard (Bassi Volumi)</td>
+                            <td class="px-6 py-4 text-green-600 font-semibold bg-white">Listino "Big Account" (Scontato)</td>
+                            <td class="px-6 py-4 text-slate-600 text-justify whitespace-normal bg-white">Accesso a tariffe di spedizione fortemente agevolate grazie ai volumi aggregati del partner logistico.</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <th scope="row" class="px-6 py-4 font-medium text-slate-900 bg-white">Materiale Imballaggio</th>
+                            <td class="px-6 py-4 text-red-600 font-semibold bg-white">Acquisto anticipato (Stock scatole)</td>
+                            <td class="px-6 py-4 text-green-600 font-semibold bg-white">A consumo per singolo ordine gestito</td>
+                            <td class="px-6 py-4 text-slate-600 text-justify whitespace-normal bg-white">Migliore gestione del cash flow aziendale e zero immobilizzazione di capitale.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+                <h4 class="font-bold text-lg mb-4 text-green-700">✅ Vantaggi Strategici (Pro)</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">✔</span>
+                        <p class="text-sm text-slate-600 text-justify"><strong>Scalabilità Immediata:</strong> Nessun limite fisico di magazzino interno per assorbire agevolmente i picchi di vendite stagionali.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">✔</span>
+                        <p class="text-sm text-slate-600 text-justify"><strong>Costi Variabili:</strong> Si paga esclusivamente per i servizi che si utilizzano e per i colli che si spediscono. Nessun costo fisso per il personale del magazzino.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">✔</span>
+                        <p class="text-sm text-slate-600 text-justify"><strong>Focus Core Business:</strong> Cimplasta SrL può dedicarsi interamente allo sviluppo del prodotto, eliminando la necessità di ricercare imballaggi o gestire le problematiche dei tracking persi.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-green-500 mr-2">✔</span>
+                        <p class="text-sm text-slate-600 text-justify"><strong>Tariffe Competitive:</strong> Si ottiene un rapido accesso al potere d'acquisto e contrattuale del partner logistico verso i grandi corrieri espressi nazionali e internazionali.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-500">
+                <h4 class="font-bold text-lg mb-4 text-red-700">⚠️ Punti di Attenzione (Contro)</h4>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-red-500 mr-2">✖</span>
+                        <p class="text-sm text-slate-600 text-justify"><strong>Controllo Qualità Indiretto:</strong> L'operazione di imballaggio finale dei prodotti non viene supervisionata in maniera diretta e visiva dal nostro staff interno.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-red-500 mr-2">✖</span>
+                        <p class="text-sm text-slate-600 text-justify"><strong>Integrazione IT:</strong> Risulta fondamentale sviluppare una sincronizzazione perfetta e senza interruzioni tra i sistemi del nostro e-commerce e il software gestionale di magazzino (WMS) del partner logistico.</p>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-red-500 mr-2">✖</span>
+                        <p class="text-sm text-slate-600 text-justify"><strong>Costi di Setup:</strong> Bisogna preventivare un costo operativo iniziale necessario per l'integrazione tecnica dei sistemi informatici e per il trasferimento fisico del primo stock di merce presso l'Hub del fornitore.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-8 text-center text-sm">
+        <p>Cimplasta SrL - Documento ad uso interno confidenziale</p>
+        <p class="mt-2">Generato dal sistema di Analisi Strategica Canvas</p>
+    </footer>
+</body>
+</html>
