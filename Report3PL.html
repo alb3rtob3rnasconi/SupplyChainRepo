@@ -7,11 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F3F4F6;
+            background-color: #030303; 
+            color: #E2E8F0; 
+            -webkit-font-smoothing: antialiased;
         }
 
         .chart-container {
@@ -20,222 +22,268 @@
             max-width: 100%;
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
-            max-height: 400px;
+            height: 350px;
+            max-height: 450px;
         }
 
         .radar-container {
             position: relative;
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             margin-left: auto;
             margin-right: auto;
-            height: 350px;
-            max-height: 450px;
+            height: 400px;
+            max-height: 500px;
         }
 
         @media (min-width: 768px) {
             .chart-container {
-                height: 350px;
+                height: 400px;
             }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3F3F46; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #C5A059; 
+        }
+
+        .gold-text {
+            color: #C5A059;
         }
     </style>
 </head>
-<body class="text-slate-800">
+<body class="selection:bg-[#C5A059] selection:text-black p-0 md:p-8">
 
-    <header class="bg-[#1F2937] text-white py-12 px-6 shadow-lg border-b-4 border-[#0891B2]">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                <div>
-                    <h2 class="text-cyan-400 font-bold tracking-wider uppercase text-sm mb-2">Appendice Dati</h2>
-                    <h1 class="text-3xl md:text-5xl font-bold mb-4">Report 3PL</h1>
-                    <p class="text-xl text-gray-300 max-w-2xl text-justify">Rappresentazione grafica delle performance degli spedizionieri, scomposizione dei costi e analisi differenziale dei margini per Cimplasta SrL.</p>
-                </div>
-                <div class="mt-6 md:mt-0 flex flex-col items-end">
-                    <a href="index.html" class="px-4 py-2 bg-transparent border border-white text-white text-sm font-semibold rounded-lg hover:bg-white hover:text-[#1F2937] transition-colors mb-4">⬅ Torna al Documento Principale</a>
-                    <div class="bg-white/10 p-4 rounded-lg backdrop-blur-sm border border-white/20 text-right w-full">
-                        <span class="block text-xl font-bold">Cimplasta SrL</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-6 py-10 space-y-12">
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <section class="bg-white rounded-xl shadow-md p-6">
-                <h3 class="text-xl font-bold text-[#4C1D95] mb-2">Analisi Comparativa Spedizionieri</h3>
-                <p class="text-sm text-slate-600 mb-6 text-justify">
-                    Mappa di posizionamento dei principali player operanti sul mercato italiano. L'analisi incrocia il costo medio per la singola spedizione sull'asse orizzontale con la velocità di consegna misurata in giorni sull'asse verticale. La dimensione della bolla indica in modo proporzionale l'affidabilità generale del corriere, calcolata sul minor tasso di resi o danni alla merce.
-                </p>
-                <div class="chart-container">
-                    <canvas id="courierScatterChart"></canvas>
-                </div>
-                <div class="mt-4 text-xs text-slate-400 text-center">
-                    Fonte: Analisi Preventivi Q1 2024 - Spedizioni 0-3kg Nazionali
-                </div>
-            </section>
-
-            <section class="bg-white rounded-xl shadow-md p-6">
-                <h3 class="text-xl font-bold text-[#4C1D95] mb-2">Composizione del Costo Logistico</h3>
-                <p class="text-sm text-slate-600 mb-6 text-justify">
-                    In un modello di logistica completamente esternalizzata, il costo unitario non è rappresentato solamente dalla spedizione nuda e cruda. Questo grafico illustra con precisione l'incidenza in percentuale delle varie voci di spesa relative alla gestione del singolo ordine da parte del partner 3PL.
-                </p>
-                <div class="chart-container">
-                    <canvas id="costBreakdownChart"></canvas>
-                </div>
-                <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
-                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-[#4C1D95] mr-2"></span>Tariffa Spedizione (Base)</div>
-                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-[#DB2777] mr-2"></span>Picking & Packing</div>
-                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-[#0891B2] mr-2"></span>Materiali Imballo</div>
-                    <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-[#D97706] mr-2"></span>Fuel Surcharge & Assicurazione</div>
-                </div>
-            </section>
-        </div>
-
-        <section class="bg-white rounded-xl shadow-md p-8 border-t-4 border-[#0891B2]">
-            <h2 class="text-2xl font-bold text-[#4C1D95] mb-4">Valutazione Dettagliata Partner 3PL & Corrieri</h2>
-            <p class="text-slate-600 mb-8 leading-relaxed text-justify">
-                La seguente analisi mette a confronto le migliori alternative indipendenti per l'outsourcing "Zero Pensieri", analizzando Shopify come ecosistema 3PL completo rispetto alle reti dirette dei principali corrieri (B2C/B2B).
-            </p>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
-                <div class="flex flex-col justify-center items-center bg-slate-50 p-6 rounded-lg border border-slate-200">
-                    <h3 class="text-lg font-bold text-center text-[#4C1D95] mb-2">Benchmarking Prestazionale (1-5)</h3>
-                    <p class="text-xs text-slate-500 text-center mb-4">Nota: Valori più ampi indicano prestazioni migliori. (Costo = Punteggio alto indica più economico)</p>
-                    <div class="radar-container w-full">
-                        <canvas id="providerRadarChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
-                    
-                    <div class="border-l-4 border-[#DB2777] bg-white p-4 shadow-sm rounded-r-lg border-y border-r border-slate-100">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🛍️</span>
-                            <h4 class="font-bold text-lg">Shopify Fulfillment Network (SFN)</h4>
-                        </div>
-                        <p class="text-sm text-slate-600 mb-3">La soluzione 3PL nativa se l'e-commerce è su piattaforma Shopify. Delega totale.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                            <div>
-                                <h5 class="font-semibold text-green-700">Pro ✅</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Integrazione IT perfetta ("1-Click").</li>
-                                    <li>Tariffazione semplice e prevedibile.</li>
-                                    <li>Gestione resi automatizzata.</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-red-700">Contro ⚠️</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Lock-in estremo con l'ecosistema.</li>
-                                    <li>Costi più alti su bassi volumi.</li>
-                                    <li>Meno flessibilità per pallet B2B.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="border-l-4 border-[#0891B2] bg-white p-4 shadow-sm rounded-r-lg border-y border-r border-slate-100">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🔴</span>
-                            <h4 class="font-bold text-lg">BRT (DPD Group)</h4>
-                        </div>
-                        <p class="text-sm text-slate-600 mb-3">Leader per volume in Italia. Adatto a logistica esternalizzata standard via API.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                            <div>
-                                <h5 class="font-semibold text-green-700">Pro ✅</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Costi unitari altamente competitivi.</li>
-                                    <li>Capillarità eccellente (BRT Fermopoint).</li>
-                                    <li>Ottima gestione colli voluminosi.</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-red-700">Contro ⚠️</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Qualità dell'ultimo miglio variabile.</li>
-                                    <li>Assistenza clienti spesso congestionata.</li>
-                                    <li>Integrazione software non sempre user-friendly.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="border-l-4 border-[#D97706] bg-white p-4 shadow-sm rounded-r-lg border-y border-r border-slate-100">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🟡</span>
-                            <h4 class="font-bold text-lg">DHL Express / Supply Chain</h4>
-                        </div>
-                        <p class="text-sm text-slate-600 mb-3">La soluzione premium orientata all'internazionalizzazione e all'affidabilità assoluta.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                            <div>
-                                <h5 class="font-semibold text-green-700">Pro ✅</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Velocità e affidabilità senza pari.</li>
-                                    <li>Percezione "Premium" da parte del cliente.</li>
-                                    <li>Customer Service dedicato ed efficiente.</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-red-700">Contro ⚠️</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Tariffe sensibilmente più elevate (fuori budget per low-ticket).</li>
-                                    <li>Supplementi carburante e aree remote costosi.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="border-l-4 border-[#4C1D95] bg-white p-4 shadow-sm rounded-r-lg border-y border-r border-slate-100">
-                        <div class="flex items-center mb-2">
-                            <span class="text-2xl mr-2">🔵</span>
-                            <h4 class="font-bold text-lg">GLS</h4>
-                        </div>
-                        <p class="text-sm text-slate-600 mb-3">Il bilanciamento classico tra costo e servizio, molto radicato nelle province italiane.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                            <div>
-                                <h5 class="font-semibold text-green-700">Pro ✅</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Buon rapporto qualità/prezzo.</li>
-                                    <li>Autonomia e flessibilità delle sedi locali.</li>
-                                    <li>Consegne veloci sul territorio nazionale.</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h5 class="font-semibold text-red-700">Contro ⚠️</h5>
-                                <ul class="list-disc pl-4 text-slate-600">
-                                    <li>Infrastruttura tecnologica (tracking) basilare.</li>
-                                    <li>Standardizzazione del servizio dipendente dalla filiale.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-white rounded-xl shadow-md p-8 border-l-8 border-[#0891B2]">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6">
-                <div class="md:w-2/3">
-                    <h3 class="text-2xl font-bold text-[#0891B2] mb-2">Analisi Margine: Gestione Interna vs Outsourcing</h3>
-                    <p class="text-slate-600 text-justify">
-                        Confronto diretto per valutare la struttura del margine operativo. Sebbene l'outsourcing introduca inevitabilmente una tariffa di gestione aggiuntiva per il confezionamento dei prodotti, il conseguente accesso alle tariffe di spedizione agevolate del partner 3PL compensa i costi di elaborazione, garantendo la stabilizzazione e il miglioramento del margine netto aziendale sul singolo ordine.
+    <div class="max-w-[1400px] mx-auto bg-[#09090B] md:border border-white/5 md:rounded-xl shadow-2xl overflow-hidden flex flex-col min-h-screen md:min-h-0">
+        
+        <header class="px-6 py-12 md:px-10 border-b border-white/5 relative overflow-hidden bg-gradient-to-b from-[#121214] to-transparent">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#C5A059]/10 via-[#C5A059] to-[#C5A059]/10 opacity-80"></div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 z-10 relative">
+                <div class="max-w-3xl">
+                    <h2 class="gold-text font-semibold tracking-[0.2em] uppercase text-xs mb-3">Appendice Dati</h2>
+                    <h1 class="text-3xl md:text-5xl font-light mb-4 tracking-tight text-white">Report <span class="font-medium">3PL</span></h1>
+                    <p class="text-sm text-zinc-400 text-justify font-light leading-relaxed">
+                        Rappresentazione grafica delle performance degli spedizionieri, scomposizione dei costi e analisi differenziale dei margini per Cimplasta SrL.
                     </p>
                 </div>
+                <div class="flex flex-col items-end shrink-0">
+                    <div class="text-right mb-4">
+                        <span class="block text-2xl font-light tracking-widest uppercase text-white">Cimplasta <span class="font-bold gold-text">SrL</span></span>
+                    </div>
+                    <a href="index.html" class="px-5 py-2.5 bg-transparent border border-white/10 text-zinc-300 text-xs font-semibold rounded hover:bg-[#C5A059] hover:text-black hover:border-[#C5A059] transition-all duration-300 uppercase tracking-widest">
+                        ⬅ Torna al Documento Principale
+                    </a>
+                </div>
             </div>
-            
-            <div class="chart-container h-96">
-                <canvas id="marginStackChart"></canvas>
-            </div>
-        </section>
+        </header>
 
-    </main>
+        <main class="flex flex-col">
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-white/5 border-b border-white/5">
+                
+                <section class="p-6 md:p-10 hover:bg-white/[0.02] transition-colors duration-300">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-medium text-white mb-3 tracking-wide">Analisi Comparativa Spedizionieri</h3>
+                        <p class="text-sm text-zinc-400 font-light leading-relaxed text-justify">
+                            Mappa di posizionamento dei principali player operanti sul mercato italiano. L'analisi incrocia il costo medio per la singola spedizione sull'asse orizzontale con la velocità di consegna misurata in giorni sull'asse verticale. La dimensione della bolla indica in modo proporzionale l'affidabilità generale del corriere, calcolata sul minor tasso di resi o danni alla merce.
+                        </p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="courierScatterChart"></canvas>
+                    </div>
+                    <div class="mt-6 text-[10px] text-zinc-600 text-center uppercase tracking-widest">
+                        Fonte: Analisi Preventivi Q1 2024 - Spedizioni 0-3kg Nazionali
+                    </div>
+                </section>
+
+                <section class="p-6 md:p-10 hover:bg-white/[0.02] transition-colors duration-300">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-medium text-white mb-3 tracking-wide">Composizione del Costo Logistico</h3>
+                        <p class="text-sm text-zinc-400 font-light leading-relaxed text-justify">
+                            In un modello di logistica completamente esternalizzata, il costo unitario non è rappresentato solamente dalla spedizione nuda e cruda. Questo grafico illustra con precisione l'incidenza in percentuale delle varie voci di spesa relative alla gestione del singolo ordine da parte del partner 3PL.
+                        </p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="costBreakdownChart"></canvas>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-6 text-sm text-zinc-400 font-medium justify-center">
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#18181B] border border-zinc-600 mr-2"></span>Tariffa Spedizione (Base)</div>
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#27272A] border border-zinc-500 mr-2"></span>Picking & Packing</div>
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#3F3F46] border border-zinc-400 mr-2"></span>Materiali Imballo</div>
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#C5A059] border border-[#C5A059] mr-2"></span>Fuel Surcharge & Assicurazione</div>
+                    </div>
+                </section>
+
+            </div>
+
+            <section class="border-b border-white/5">
+                <div class="p-6 md:p-10 border-b border-white/5 bg-[#121214]">
+                    <h2 class="text-2xl font-medium text-white mb-3 tracking-tight">Valutazione Dettagliata Partner 3PL & Corrieri</h2>
+                    <p class="text-sm text-zinc-400 leading-relaxed text-justify max-w-5xl font-light">
+                        La seguente analisi mette a confronto le migliori alternative indipendenti per l'outsourcing "Zero Pensieri", analizzando Shopify come ecosistema 3PL completo rispetto alle reti dirette dei principali corrieri (B2C/B2B).
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-white/5">
+                    
+                    <div class="lg:col-span-2 p-6 md:p-10 flex flex-col justify-center items-center bg-black/40">
+                        <h3 class="text-xs font-semibold tracking-[0.2em] uppercase gold-text mb-6">Benchmarking Prestazionale (1-5)</h3>
+                        <p class="text-[10px] text-zinc-500 text-center mb-6 uppercase tracking-wider">Nota: Valori più ampi indicano prestazioni migliori. (Costo = Punteggio alto indica più economico)</p>
+                        <div class="radar-container w-full">
+                            <canvas id="providerRadarChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-3 p-6 md:p-10 space-y-0 max-h-[600px] overflow-y-auto custom-scrollbar bg-[#09090B]">
+                        
+                        <div class="py-5 border-b border-white/5 group border-l-2 border-l-[#C5A059] pl-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-medium text-base text-zinc-200 group-hover:text-[#C5A059] transition-colors flex items-center">
+                                    <span class="mr-2 opacity-80 text-lg leading-none"></span> Shopify Fulfillment Network (SFN)
+                                </h4>
+                            </div>
+                            <p class="text-[13px] text-zinc-400 mb-4 font-light">La soluzione 3PL nativa se l'e-commerce è su piattaforma Shopify. Delega totale.</p>
+                            <div class="flex flex-col sm:flex-row gap-6 text-[13px]">
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Pro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Integrazione IT perfetta ("1-Click").</li>
+                                        <li>Tariffazione semplice e prevedibile.</li>
+                                        <li>Gestione resi automatizzata.</li>
+                                    </ul>
+                                </div>
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Contro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Lock-in estremo con l'ecosistema.</li>
+                                        <li>Costi più alti su bassi volumi.</li>
+                                        <li>Meno flessibilità per pallet B2B.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="py-5 border-b border-white/5 group border-l-2 border-l-[#A1A1AA] pl-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-medium text-base text-zinc-200 group-hover:text-white transition-colors flex items-center">
+                                    <span class="mr-2 opacity-80 text-lg leading-none"></span> BRT (DPD Group)
+                                </h4>
+                            </div>
+                            <p class="text-[13px] text-zinc-400 mb-4 font-light">Leader per volume in Italia. Adatto a logistica esternalizzata standard via API.</p>
+                            <div class="flex flex-col sm:flex-row gap-6 text-[13px]">
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Pro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Costi unitari altamente competitivi.</li>
+                                        <li>Capillarità eccellente (BRT Fermopoint).</li>
+                                        <li>Ottima gestione colli voluminosi.</li>
+                                    </ul>
+                                </div>
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Contro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Qualità dell'ultimo miglio variabile.</li>
+                                        <li>Assistenza clienti spesso congestionata.</li>
+                                        <li>Integrazione software non sempre user-friendly.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="py-5 border-b border-white/5 group border-l-2 border-l-[#E4E4E7] pl-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-medium text-base text-zinc-200 group-hover:text-white transition-colors flex items-center">
+                                    <span class="mr-2 opacity-80 text-lg leading-none"></span> DHL Express / Supply Chain
+                                </h4>
+                            </div>
+                            <p class="text-[13px] text-zinc-400 mb-4 font-light">La soluzione premium orientata all'internazionalizzazione e all'affidabilità assoluta.</p>
+                            <div class="flex flex-col sm:flex-row gap-6 text-[13px]">
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Pro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Velocità e affidabilità senza pari.</li>
+                                        <li>Percezione "Premium" da parte del cliente.</li>
+                                        <li>Customer Service dedicato ed efficiente.</li>
+                                    </ul>
+                                </div>
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Contro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Tariffe sensibilmente più elevate (fuori budget per low-ticket).</li>
+                                        <li>Supplementi carburante e aree remote costosi.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="py-5 group border-l-2 border-l-[#52525B] pl-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <h4 class="font-medium text-base text-zinc-200 group-hover:text-white transition-colors flex items-center">
+                                    <span class="mr-2 opacity-80 text-lg leading-none"></span> GLS
+                                </h4>
+                            </div>
+                            <p class="text-[13px] text-zinc-400 mb-4 font-light">Il bilanciamento classico tra costo e servizio, molto radicato nelle province italiane.</p>
+                            <div class="flex flex-col sm:flex-row gap-6 text-[13px]">
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Pro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Buon rapporto qualità/prezzo.</li>
+                                        <li>Autonomia e flessibilità delle sedi locali.</li>
+                                        <li>Consegne veloci sul territorio nazionale.</li>
+                                    </ul>
+                                </div>
+                                <div class="w-full sm:w-1/2">
+                                    <h5 class="block text-zinc-300 font-medium mb-2">Contro </h5>
+                                    <ul class="list-disc pl-4 text-zinc-500 font-light space-y-1">
+                                        <li>Infrastruttura tecnologica (tracking) basilare.</li>
+                                        <li>Standardizzazione del servizio dipendente dalla filiale.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="p-6 md:p-10 bg-gradient-to-t from-black/80 to-transparent">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+                    <div class="md:w-3/4">
+                        <h3 class="text-2xl font-medium text-white mb-4 tracking-wide">Analisi Margine: Gestione Interna vs Outsourcing</h3>
+                        <p class="text-sm text-zinc-400 text-justify leading-relaxed font-light">
+                            Confronto diretto per valutare la struttura del margine operativo. Sebbene l'outsourcing introduca inevitabilmente una tariffa di gestione aggiuntiva per il confezionamento dei prodotti, il conseguente accesso alle tariffe di spedizione agevolate del partner 3PL compensa i costi di elaborazione, garantendo la stabilizzazione e il miglioramento del margine netto aziendale sul singolo ordine.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="chart-container h-[400px]">
+                    <canvas id="marginStackChart"></canvas>
+                </div>
+            </section>
+
+        </main>
+    </div>
 
     <script>
+        const colorGold = '#C5A059';      
+        const colorZinc800 = '#27272A';
+        const colorZinc700 = '#3F3F46';
+        const colorZinc600 = '#52525B';
+        const colorZinc500 = '#71717A';
+        const colorZinc400 = '#A1A1AA';
+        const colorZinc300 = '#D4D4D8';
+        const colorZinc200 = '#E4E4E7';
+
         function splitLabel(label) {
             if (label.length <= 16) return label;
             const words = label.split(' ');
@@ -255,6 +303,15 @@
         }
 
         const commonTooltip = {
+            backgroundColor: '#09090B',
+            titleColor: '#C5A059',
+            bodyColor: '#F4F4F5',
+            borderColor: '#27272A',
+            borderWidth: 1,
+            padding: 16,
+            cornerRadius: 4,
+            titleFont: { family: "'Inter', sans-serif", size: 13, weight: '500' },
+            bodyFont: { family: "'Inter', sans-serif", size: 12, weight: '300' },
             callbacks: {
                 title: function(tooltipItems) {
                     const item = tooltipItems[0];
@@ -288,13 +345,13 @@
                         { x: 4.90, y: 3.5, r: 10 }
                     ],
                     backgroundColor: [
-                        'rgba(217, 119, 6, 0.7)',
-                        'rgba(8, 145, 178, 0.7)',
-                        'rgba(219, 39, 119, 0.7)',
-                        'rgba(76, 29, 149, 0.7)',
-                        'rgba(156, 163, 175, 0.7)'
+                        colorZinc600,  
+                        colorZinc500, 
+                        colorZinc400,   
+                        colorGold,     
+                        colorZinc700      
                     ],
-                    borderColor: 'rgba(255,255,255,1)',
+                    borderColor: '#09090B',
                     borderWidth: 2
                 }]
             },
@@ -303,10 +360,11 @@
                 maintainAspectRatio: false,
                 plugins: {
                     tooltip: {
+                        ...commonTooltip,
                         callbacks: {
                             label: function(context) {
                                 const labels = ['BRT/DPD', 'GLS Executive', 'DHL Express', 'UPS Standard', 'Poste/SDA'];
-                                return labels[context.dataIndex] + ': €' + context.raw.x + ' / ' + context.raw.y + ' gg';
+                                return labels[context.dataIndex] + ': €' + context.raw.x.toFixed(2) + ' / ' + context.raw.y + ' gg';
                             }
                         }
                     },
@@ -314,16 +372,19 @@
                 },
                 scales: {
                     x: {
-                        title: { display: true, text: 'Costo Medio Spedizione (€)', color: '#4B5563' },
+                        title: { display: true, text: 'Costo Medio Spedizione (€)', color: colorZinc400, font: { weight: '500', size: 12 } },
                         min: 3,
                         max: 14,
-                        grid: { display: false }
+                        grid: { color: 'rgba(255,255,255,0.03)', drawBorder: false },
+                        ticks: { color: colorZinc500, font: { size: 11 } }
                     },
                     y: {
-                        title: { display: true, text: 'Tempi di Consegna Medi (Giorni)', color: '#4B5563' },
+                        title: { display: true, text: 'Tempi di Consegna Medi (Giorni)', color: colorZinc400, font: { weight: '500', size: 12 } },
                         min: 0,
                         max: 5,
-                        reverse: false
+                        reverse: false,
+                        grid: { color: 'rgba(255,255,255,0.03)', drawBorder: false },
+                        ticks: { color: colorZinc500, font: { size: 11 } }
                     }
                 }
             }
@@ -333,13 +394,15 @@
         const donutLabels = ['Tariffa Spedizione Base', 'Picking & Packing (3PL)', 'Materiali Imballaggio', 'Fuel & Assicurazione'].map(splitLabel);
         
         new Chart(ctxDonut, {
-            type: 'doughnut',
+            type: 'pie',
             data: {
                 labels: donutLabels,
                 datasets: [{
                     data: [55, 25, 12, 8],
-                    backgroundColor: ['#4C1D95', '#DB2777', '#0891B2', '#D97706'],
-                    borderWidth: 0
+                    backgroundColor: ['#18181B', '#27272A', '#3F3F46', colorGold],
+                    borderWidth: 1,
+                    borderColor: '#09090B',
+                    hoverOffset: 4
                 }]
             },
             options: {
@@ -347,10 +410,7 @@
                 maintainAspectRatio: false,
                 plugins: {
                     tooltip: commonTooltip,
-                    legend: {
-                        position: 'right',
-                        labels: { font: commonFont, boxWidth: 12 }
-                    }
+                    legend: { display: false } 
                 }
             }
         });
@@ -364,33 +424,37 @@
                     {
                         label: 'Shopify SFN',
                         data: [3, 4, 5, 4, 4],
-                        backgroundColor: 'rgba(219, 39, 119, 0.2)',
-                        borderColor: '#DB2777',
-                        pointBackgroundColor: '#DB2777',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'BRT',
-                        data: [5, 3, 3, 5, 2],
-                        backgroundColor: 'rgba(8, 145, 178, 0.2)',
-                        borderColor: '#0891B2',
-                        pointBackgroundColor: '#0891B2',
-                        borderWidth: 2
-                    },
-                    {
-                        label: 'DHL Express',
-                        data: [1, 5, 4, 4, 5],
-                        backgroundColor: 'rgba(217, 119, 6, 0.2)',
-                        borderColor: '#D97706',
-                        pointBackgroundColor: '#D97706',
+                        backgroundColor: 'transparent', 
+                        borderColor: colorGold,
+                        pointBackgroundColor: colorGold,
+                        pointRadius: 4,
                         borderWidth: 2
                     },
                     {
                         label: 'GLS',
                         data: [4, 4, 3, 4, 3],
-                        backgroundColor: 'rgba(76, 29, 149, 0.2)',
-                        borderColor: '#4C1D95',
-                        pointBackgroundColor: '#4C1D95',
+                        backgroundColor: 'transparent', 
+                        borderColor: colorZinc600,
+                        pointBackgroundColor: colorZinc600,
+                        pointRadius: 4,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'BRT',
+                        data: [5, 3, 3, 5, 2],
+                        backgroundColor: 'transparent', 
+                        borderColor: colorZinc400,
+                        pointBackgroundColor: colorZinc400,
+                        pointRadius: 4,
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'DHL Express',
+                        data: [1, 5, 4, 4, 5],
+                        backgroundColor: 'transparent', 
+                        borderColor: colorZinc200,
+                        pointBackgroundColor: colorZinc200,
+                        pointRadius: 4,
                         borderWidth: 2
                     }
                 ]
@@ -400,24 +464,25 @@
                 maintainAspectRatio: false,
                 scales: {
                     r: {
-                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
-                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        angleLines: { color: 'rgba(255, 255, 255, 0.08)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.08)' },
                         pointLabels: {
-                            font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' },
-                            color: '#4B5563'
+                            font: { family: "'Inter', sans-serif", size: 10, weight: '500' },
+                            color: colorZinc400
                         },
-                        ticks: { display: false, min: 0, max: 5, stepSize: 1 }
+                        ticks: { display: false, min: 0, max: 5, stepSize: 1, backdropColor: 'transparent' }
                     }
                 },
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { font: commonFont, boxWidth: 10, padding: 15 }
+                        labels: { font: commonFont, boxWidth: 8, padding: 15, usePointStyle: true, color: colorZinc400 }
                     },
                     tooltip: {
+                        ...commonTooltip,
                         callbacks: {
                             label: function(context) {
-                                return context.dataset.label + ': ' + context.raw + '/5';
+                                return context.dataset.label + ': ' + context.raw + ' / 5';
                             }
                         }
                     }
@@ -436,37 +501,60 @@
                     {
                         label: 'Costo Prodotto',
                         data: [15, 15],
-                        backgroundColor: '#9CA3AF',
+                        backgroundColor: '#121214', 
+                        borderColor: '#27272A',
+                        borderWidth: 1,
+                        borderRadius: 0
                     },
                     {
                         label: 'Costo Logistico Totale',
                         data: [12, 9.5],
-                        backgroundColor: '#DB2777',
+                        backgroundColor: '#18181B', 
+                        borderColor: '#3F3F46',
+                        borderWidth: 1,
+                        borderRadius: 0
                     },
                     {
                         label: 'Costi Marketing/Stripe',
                         data: [5, 5],
-                        backgroundColor: '#D97706',
+                        backgroundColor: '#27272A', 
+                        borderColor: '#52525B',
+                        borderWidth: 1,
+                        borderRadius: 0
                     },
                     {
                         label: 'Margine Netto Aziendale',
                         data: [8, 10.5],
-                        backgroundColor: '#0891B2',
+                        backgroundColor: 'rgba(197, 160, 89, 0.85)', 
+                        borderColor: colorGold,
+                        borderWidth: 1,
+                        borderRadius: { topLeft: 3, topRight: 3 }
                     }
                 ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                barPercentage: 0.6,
                 plugins: {
                     tooltip: commonTooltip,
-                    legend: { position: 'bottom' }
+                    legend: { 
+                        position: 'top',
+                        align: 'end',
+                        labels: { color: colorZinc400, usePointStyle: true, padding: 20, font: { size: 11, weight: '400' } }
+                    }
                 },
                 scales: {
-                    x: { stacked: true, grid: { display: false } },
+                    x: { 
+                        stacked: true, 
+                        grid: { display: false },
+                        ticks: { color: colorZinc300, font: { size: 12, weight: '500' } }
+                    },
                     y: { 
                         stacked: true,
-                        title: { display: true, text: 'Valore Ordine Medio (€40)' },
+                        title: { display: true, text: 'Valore Ordine Medio (€40)', color: colorZinc400, font: { size: 11, weight: '400' } },
+                        grid: { color: 'rgba(255, 255, 255, 0.03)', drawBorder: false },
+                        ticks: { color: colorZinc500, font: { size: 11 } },
                         beginAtZero: true
                     }
                 }
