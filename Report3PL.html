@@ -117,10 +117,10 @@
                         <canvas id="costBreakdownChart"></canvas>
                     </div>
                     <div class="mt-8 flex flex-wrap gap-6 text-sm text-zinc-400 font-medium justify-center">
-                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#18181B] border border-zinc-600 mr-2"></span>Tariffa Spedizione (Base)</div>
-                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#27272A] border border-zinc-500 mr-2"></span>Picking & Packing</div>
-                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#3F3F46] border border-zinc-400 mr-2"></span>Materiali Imballo</div>
-                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded bg-[#C5A059] border border-[#C5A059] mr-2"></span>Fuel Surcharge & Assicurazione</div>
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#18181B] border border-zinc-600 mr-2"></span>Tariffa Spedizione (Base)</div>
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#27272A] border border-zinc-500 mr-2"></span>Picking & Packing</div>
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#3F3F46] border border-zinc-400 mr-2"></span>Materiali Imballo</div>
+                        <div class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-[#C5A059] border border-[#C5A059] mr-2"></span>Fuel Surcharge & Assicurazione</div>
                     </div>
                 </section>
 
@@ -338,11 +338,11 @@
                 datasets: [{
                     label: 'Performance Spedizionieri',
                     data: [
-                        { x: 5.50, y: 2.1, r: 15 },
-                        { x: 6.20, y: 1.8, r: 18 },
-                        { x: 12.00, y: 1.1, r: 25 },
-                        { x: 9.50, y: 1.5, r: 22 },
-                        { x: 4.90, y: 3.5, r: 10 }
+                        { x: 5.50, y: 2.1, r: 36 }, // Ingrandito
+                        { x: 6.20, y: 1.8, r: 42 }, // Ingrandito
+                        { x: 12.00, y: 1.1, r: 58 }, // Ingrandito
+                        { x: 9.50, y: 1.5, r: 52 }, // Ingrandito
+                        { x: 4.90, y: 3.5, r: 28 }  // Ingrandito
                     ],
                     backgroundColor: [
                         colorZinc600,  
@@ -352,12 +352,32 @@
                         colorZinc700      
                     ],
                     borderColor: '#09090B',
-                    borderWidth: 2
+                    borderWidth: 2,
+                    hoverBackgroundColor: [
+                        '#A1A1AA', // Colori schiariti al passaggio del mouse
+                        '#D4D4D8',
+                        '#FFFFFF',
+                        '#FDE047', 
+                        '#71717A'
+                    ],
+                    hoverBorderColor: '#FFFFFF',
+                    hoverBorderWidth: 3
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                    duration: 600,
+                    easing: 'easeOutQuart'
+                },
+                transitions: {
+                    active: {
+                        animation: {
+                            duration: 300 // Transizione morbida al passaggio del mouse
+                        }
+                    }
+                },
                 plugins: {
                     tooltip: {
                         ...commonTooltip,
